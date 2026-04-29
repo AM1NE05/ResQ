@@ -47,8 +47,8 @@ export function AuthScreen() {
         });
         if (error) throw error;
       }
-    } catch (err: any) {
-      toast.error(err.message ?? "Auth error");
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : "Auth error");
     } finally {
       setBusy(false);
     }
@@ -64,14 +64,21 @@ export function AuthScreen() {
       <div className="flex flex-1 flex-col items-center justify-center px-6">
         <div className="w-full max-w-sm">
           <div className="mb-8 text-center">
-            <h1 className="text-3xl font-extrabold leading-tight">{t("auth.welcome")}</h1>
+            <h1 className="text-3xl font-extrabold leading-tight">
+              {t("auth.welcome")}
+            </h1>
             <p className="mt-2 text-sm text-white/70">{t("auth.sub")}</p>
           </div>
 
-          <form onSubmit={submit} className="space-y-3 rounded-3xl bg-card/95 p-6 text-foreground shadow-[var(--shadow-elevated)] backdrop-blur-xl">
+          <form
+            onSubmit={submit}
+            className="space-y-3 rounded-3xl bg-card/95 p-6 text-foreground shadow-[var(--shadow-elevated)] backdrop-blur-xl"
+          >
             {mode === "signup" && (
               <div>
-                <label className="mb-1 block text-sm font-medium">{t("auth.fullName")}</label>
+                <label className="mb-1 block text-sm font-medium">
+                  {t("auth.fullName")}
+                </label>
                 <input
                   className="w-full rounded-xl border border-input bg-background px-4 py-3 text-base outline-none focus:border-emergency"
                   value={fullName}
@@ -81,7 +88,9 @@ export function AuthScreen() {
               </div>
             )}
             <div>
-              <label className="mb-1 block text-sm font-medium">{t("auth.email")}</label>
+              <label className="mb-1 block text-sm font-medium">
+                {t("auth.email")}
+              </label>
               <input
                 type="email"
                 className="w-full rounded-xl border border-input bg-background px-4 py-3 text-base outline-none focus:border-emergency"
@@ -91,7 +100,9 @@ export function AuthScreen() {
               />
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium">{t("auth.password")}</label>
+              <label className="mb-1 block text-sm font-medium">
+                {t("auth.password")}
+              </label>
               <input
                 type="password"
                 className="w-full rounded-xl border border-input bg-background px-4 py-3 text-base outline-none focus:border-emergency"
@@ -106,7 +117,11 @@ export function AuthScreen() {
               disabled={busy}
               className="btn-emergency w-full rounded-xl py-3 text-base font-bold transition active:scale-[0.98] disabled:opacity-60"
             >
-              {busy ? t("auth.loading") : mode === "signin" ? t("auth.signIn") : t("auth.signUp")}
+              {busy
+                ? t("auth.loading")
+                : mode === "signin"
+                  ? t("auth.signIn")
+                  : t("auth.signUp")}
             </button>
 
             <button

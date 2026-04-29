@@ -1,7 +1,13 @@
 import logoImg from "@/assets/resq-logo.png";
 
 export function Logo({ className = "h-10 w-10" }: { className?: string }) {
-  return <img src={logoImg} alt="ResQ Najda" className={`${className} object-contain`} />;
+  return (
+    <img
+      src={logoImg}
+      alt="ResQ Najda"
+      className={`${className} object-contain`}
+    />
+  );
 }
 
 export function LogoLockup({ className = "" }: { className?: string }) {

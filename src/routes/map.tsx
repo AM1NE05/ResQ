@@ -6,13 +6,27 @@ import { toast } from "sonner";
 import { AppShell } from "@/components/AppShell";
 import { useI18n } from "@/lib/i18n";
 import { supabase } from "@/integrations/client";
-import { Activity, Flame, Shield, Car, AlertTriangle, X, Navigation, HeartHandshake, MapPin, Clock } from "lucide-react";
+import {
+  Activity,
+  Flame,
+  Shield,
+  Car,
+  AlertTriangle,
+  X,
+  Navigation,
+  HeartHandshake,
+  MapPin,
+  Clock,
+} from "lucide-react";
 
 export const Route = createFileRoute("/map")({
   head: () => ({
     meta: [
       { title: "ResQ Najda — Nearby alerts" },
-      { name: "description", content: "Live map of incidents near you, sorted by distance." },
+      {
+        name: "description",
+        content: "Live map of incidents near you, sorted by distance.",
+      },
     ],
   }),
   component: () => (
@@ -48,14 +62,19 @@ const TYPE_ICON: Record<AlertRow["alert_type"], typeof Activity> = {
   other: AlertTriangle,
 };
 
-function distanceKm(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
+function distanceKm(
+  a: { lat: number; lng: number },
+  b: { lat: number; lng: number },
+) {
   const R = 6371;
   const toRad = (x: number) => (x * Math.PI) / 180;
   const dLat = toRad(b.lat - a.lat);
   const dLng = toRad(b.lng - a.lng);
   const lat1 = toRad(a.lat);
   const lat2 = toRad(b.lat);
-  const x = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+  const x =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
   return 2 * R * Math.asin(Math.sqrt(x));
 }
 
@@ -87,7 +106,7 @@ function MapPage() {
       navigator.geolocation.getCurrentPosition(
         (p) => setMe({ lat: p.coords.latitude, lng: p.coords.longitude }),
         () => setMe({ lat: 36.8065, lng: 10.1815 }),
-        { enableHighAccuracy: true, timeout: 8000 }
+        { enableHighAccuracy: true, timeout: 8000 },
       );
     } else {
       setMe({ lat: 36.8065, lng: 10.1815 });
@@ -107,9 +126,15 @@ function MapPage() {
     load();
     const ch = supabase
       .channel("alerts-stream")
-      .on("postgres_changes", { event: "*", schema: "public", table: "alerts" }, load)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "alerts" },
+        load,
+      )
       .subscribe();
-    return () => { supabase.removeChannel(ch); };
+    return () => {
+      supabase.removeChannel(ch);
+    };
   }, []);
 
   const sorted = useMemo(() => {
@@ -130,13 +155,19 @@ function MapPage() {
       <h1 className="text-2xl font-extrabold">{t("map.title")}</h1>
 
       <div className="h-72 overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-card)]">
-        <MapContainer center={[center.lat, center.lng]} zoom={12} scrollWheelZoom>
+        <MapContainer
+          center={[center.lat, center.lng]}
+          zoom={12}
+          scrollWheelZoom
+        >
           <TileLayer
-            attribution='&copy; OpenStreetMap'
+            attribution="&copy; OpenStreetMap"
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <CenterOn pos={me} />
-          {me && <Marker position={[me.lat, me.lng]} icon={pinIcon("#1a4ed8")} />}
+          {me && (
+            <Marker position={[me.lat, me.lng]} icon={pinIcon("#1a4ed8")} />
+          )}
           {alerts.map((a) => (
             <Marker
               key={a.id}
@@ -149,7 +180,9 @@ function MapPage() {
       </div>
 
       {sorted.length === 0 ? (
-        <p className="rounded-2xl bg-card p-6 text-center text-sm text-muted-foreground">{t("map.empty")}</p>
+        <p className="rounded-2xl bg-card p-6 text-center text-sm text-muted-foreground">
+          {t("map.empty")}
+        </p>
       ) : (
         <ul className="space-y-2">
           {sorted.map(({ a, d }) => {
@@ -168,13 +201,16 @@ function MapPage() {
                   </span>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <div className="font-semibold capitalize">{t(`sos.type.${a.alert_type}`)}</div>
+                      <div className="font-semibold capitalize">
+                        {t(`sos.type.${a.alert_type}`)}
+                      </div>
                       <div className="text-xs font-medium text-muted-foreground">
                         {d.toFixed(1)} {t("map.distance")}
                       </div>
                     </div>
                     <div className="truncate text-xs text-muted-foreground">
-                      {t(`severity.${a.severity}`)} • {new Date(a.created_at).toLocaleTimeString()}
+                      {t(`severity.${a.severity}`)} •{" "}
+                      {new Date(a.created_at).toLocaleTimeString()}
                     </div>
                   </div>
                 </button>
@@ -235,7 +271,9 @@ function IncidentSheet({
             <Icon className="h-6 w-6" />
           </span>
           <div className="flex-1 min-w-0">
-            <h2 className="text-lg font-extrabold">{t(`sos.type.${alert.alert_type}`)}</h2>
+            <h2 className="text-lg font-extrabold">
+              {t(`sos.type.${alert.alert_type}`)}
+            </h2>
             <div className="mt-1 flex flex-wrap gap-2">
               <span
                 className="rounded-full px-2 py-0.5 text-[11px] font-bold text-white"
@@ -266,13 +304,16 @@ function IncidentSheet({
         <div className="mt-4 space-y-2 text-xs text-muted-foreground">
           <div className="flex items-center gap-2">
             <Clock className="h-3.5 w-3.5" />
-            <span>{t("map.reported")}: {new Date(alert.created_at).toLocaleString()}</span>
+            <span>
+              {t("map.reported")}: {new Date(alert.created_at).toLocaleString()}
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <MapPin className="h-3.5 w-3.5" />
             <span>
               {alert.latitude.toFixed(5)}, {alert.longitude.toFixed(5)}
-              {distance !== null && ` • ${distance.toFixed(2)} ${t("map.distance")}`}
+              {distance !== null &&
+                ` • ${distance.toFixed(2)} ${t("map.distance")}`}
             </span>
           </div>
         </div>

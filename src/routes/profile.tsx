@@ -71,7 +71,9 @@ function ProfilePage() {
         blood_type: bloodType || null,
         allergies: allergies.trim() || null,
         medical_notes: medicalNotes.trim() || null,
-        emergency_contacts: contacts.filter((c) => c.name || c.phone) as unknown as never,
+        emergency_contacts: contacts.filter(
+          (c) => c.name || c.phone,
+        ) as unknown as never,
       })
       .eq("id", user.id);
     setSaving(false);
@@ -124,13 +126,24 @@ function ProfilePage() {
 
       {/* Identity */}
       <section className="space-y-3 rounded-2xl bg-card p-4 shadow-[var(--shadow-card)]">
-        <Field label={t("profile.fullName")} value={fullName} onChange={setFullName} />
-        <Field label={t("profile.phone")} value={phone} onChange={setPhone} type="tel" />
+        <Field
+          label={t("profile.fullName")}
+          value={fullName}
+          onChange={setFullName}
+        />
+        <Field
+          label={t("profile.phone")}
+          value={phone}
+          onChange={setPhone}
+          type="tel"
+        />
       </section>
 
       {/* Medical */}
       <section className="space-y-3 rounded-2xl bg-card p-4 shadow-[var(--shadow-card)]">
-        <h2 className="text-sm font-bold text-foreground">{t("profile.medical")}</h2>
+        <h2 className="text-sm font-bold text-foreground">
+          {t("profile.medical")}
+        </h2>
         <div>
           <label className="mb-1 block text-xs font-medium text-muted-foreground">
             {t("profile.bloodType")}
@@ -174,7 +187,9 @@ function ProfilePage() {
       {/* Contacts */}
       <section className="space-y-3 rounded-2xl bg-card p-4 shadow-[var(--shadow-card)]">
         <div className="flex items-center justify-between">
-          <h2 className="text-sm font-bold text-foreground">{t("profile.contacts")}</h2>
+          <h2 className="text-sm font-bold text-foreground">
+            {t("profile.contacts")}
+          </h2>
           <button
             type="button"
             onClick={addContact}
@@ -187,10 +202,26 @@ function ProfilePage() {
           <p className="text-xs text-muted-foreground">—</p>
         )}
         {contacts.map((c, i) => (
-          <div key={i} className="space-y-2 rounded-xl border border-border p-3">
-            <Field label={t("profile.contact.name")} value={c.name} onChange={(v) => updateContact(i, "name", v)} />
-            <Field label={t("profile.contact.phone")} value={c.phone} onChange={(v) => updateContact(i, "phone", v)} type="tel" />
-            <Field label={t("profile.contact.relation")} value={c.relation} onChange={(v) => updateContact(i, "relation", v)} />
+          <div
+            key={i}
+            className="space-y-2 rounded-xl border border-border p-3"
+          >
+            <Field
+              label={t("profile.contact.name")}
+              value={c.name}
+              onChange={(v) => updateContact(i, "name", v)}
+            />
+            <Field
+              label={t("profile.contact.phone")}
+              value={c.phone}
+              onChange={(v) => updateContact(i, "phone", v)}
+              type="tel"
+            />
+            <Field
+              label={t("profile.contact.relation")}
+              value={c.relation}
+              onChange={(v) => updateContact(i, "relation", v)}
+            />
             <button
               type="button"
               onClick={() => removeContact(i)}
@@ -242,7 +273,9 @@ function Field({
 }) {
   return (
     <div>
-      <label className="mb-1 block text-xs font-medium text-muted-foreground">{label}</label>
+      <label className="mb-1 block text-xs font-medium text-muted-foreground">
+        {label}
+      </label>
       <input
         type={type}
         value={value}

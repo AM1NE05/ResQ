@@ -13,7 +13,11 @@ const LANGS: { code: Lang; label: string }[] = [
   { code: "en", label: "English" },
 ];
 
-export function LanguageSwitcher({ variant = "light" }: { variant?: "light" | "dark" }) {
+export function LanguageSwitcher({
+  variant = "light",
+}: {
+  variant?: "light" | "dark";
+}) {
   const { lang, setLang } = useI18n();
   const cls =
     variant === "dark"
@@ -29,7 +33,11 @@ export function LanguageSwitcher({ variant = "light" }: { variant?: "light" | "d
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {LANGS.map((l) => (
-          <DropdownMenuItem key={l.code} onClick={() => setLang(l.code)} className={lang === l.code ? "font-bold" : ""}>
+          <DropdownMenuItem
+            key={l.code}
+            onClick={() => setLang(l.code)}
+            className={lang === l.code ? "font-bold" : ""}
+          >
             {l.label}
           </DropdownMenuItem>
         ))}

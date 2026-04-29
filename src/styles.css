@@ -1,5 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
 @import "tailwindcss" source(none);
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap') layer(base);
 @source "../src";
 @import "tw-animate-css";
 
@@ -98,10 +98,24 @@
   --chart-5: oklch(0.55 0.2 295);
 
   /* Gradients & shadows */
-  --gradient-navy: linear-gradient(180deg, oklch(0.22 0.08 265), oklch(0.16 0.07 265));
-  --gradient-emergency: linear-gradient(135deg, oklch(0.62 0.24 25), oklch(0.5 0.22 25));
-  --gradient-hero: linear-gradient(160deg, oklch(0.22 0.08 265) 0%, oklch(0.28 0.1 265) 60%, oklch(0.32 0.12 270) 100%);
-  --shadow-emergency: 0 20px 50px -12px color-mix(in oklab, var(--emergency) 55%, transparent);
+  --gradient-navy: linear-gradient(
+    180deg,
+    oklch(0.22 0.08 265),
+    oklch(0.16 0.07 265)
+  );
+  --gradient-emergency: linear-gradient(
+    135deg,
+    oklch(0.62 0.24 25),
+    oklch(0.5 0.22 25)
+  );
+  --gradient-hero: linear-gradient(
+    160deg,
+    oklch(0.22 0.08 265) 0%,
+    oklch(0.28 0.1 265) 60%,
+    oklch(0.32 0.12 270) 100%
+  );
+  --shadow-emergency: 0 20px 50px -12px
+    color-mix(in oklab, var(--emergency) 55%, transparent);
   --shadow-card: 0 4px 16px -4px oklch(0 0 0 / 0.08);
   --shadow-elevated: 0 12px 32px -8px oklch(0 0 0 / 0.12);
 }
@@ -127,8 +141,12 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { font-family: var(--font-display); }
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    font-family: var(--font-display);
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -136,7 +154,9 @@
   }
 
   /* RTL helpers */
-  [dir="rtl"] .flip-x { transform: scaleX(-1); }
+  [dir="rtl"] .flip-x {
+    transform: scaleX(-1);
+  }
 }
 
 @layer components {
@@ -145,21 +165,44 @@
     color: var(--emergency-foreground);
     box-shadow: var(--shadow-emergency);
   }
-  .bg-hero { background: var(--gradient-hero); }
-  .bg-navy-gradient { background: var(--gradient-navy); }
-  .ring-emergency { box-shadow: 0 0 0 4px color-mix(in oklab, var(--emergency) 25%, transparent); }
+  .bg-hero {
+    background: var(--gradient-hero);
+  }
+  .bg-navy-gradient {
+    background: var(--gradient-navy);
+  }
+  .ring-emergency {
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--emergency) 25%, transparent);
+  }
 }
 
 /* SOS pulse */
 @keyframes sos-pulse {
-  0%   { box-shadow: 0 0 0 0 color-mix(in oklab, var(--emergency) 60%, transparent), var(--shadow-emergency); }
-  70%  { box-shadow: 0 0 0 32px color-mix(in oklab, var(--emergency) 0%, transparent), var(--shadow-emergency); }
-  100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--emergency) 0%, transparent), var(--shadow-emergency); }
+  0% {
+    box-shadow:
+      0 0 0 0 color-mix(in oklab, var(--emergency) 60%, transparent),
+      var(--shadow-emergency);
+  }
+  70% {
+    box-shadow:
+      0 0 0 32px color-mix(in oklab, var(--emergency) 0%, transparent),
+      var(--shadow-emergency);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 color-mix(in oklab, var(--emergency) 0%, transparent),
+      var(--shadow-emergency);
+  }
 }
-.animate-sos { animation: sos-pulse 1.8s ease-out infinite; }
+.animate-sos {
+  animation: sos-pulse 1.8s ease-out infinite;
+}
 
 /* Cairo Arabic font from Google Fonts */
 
-
 /* Leaflet quick fix for height */
-.leaflet-container { height: 100%; width: 100%; z-index: 0; }
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+}

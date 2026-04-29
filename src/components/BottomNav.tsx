@@ -15,14 +15,20 @@ export function BottomNav() {
   const right = [
     { to: "/profile", icon: User, label: t("nav.profile") },
     { to: "/help", icon: HelpCircle, label: t("nav.help") },
-    ...(isAdmin ? [{ to: "/admin", icon: ShieldCheck, label: t("nav.admin") }] : []),
+    ...(isAdmin
+      ? [{ to: "/admin", icon: ShieldCheck, label: t("nav.admin") }]
+      : []),
   ];
 
   return (
     <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-card/95 backdrop-blur-md">
       <ul className="mx-auto flex max-w-md items-end justify-around px-4 pb-3 pt-2">
         {left.map((item) => (
-          <NavItem key={item.to} item={item} active={loc.pathname === item.to} />
+          <NavItem
+            key={item.to}
+            item={item}
+            active={loc.pathname === item.to}
+          />
         ))}
         <li className="-mt-6">
           <Link
@@ -35,7 +41,11 @@ export function BottomNav() {
           </Link>
         </li>
         {right.map((item) => (
-          <NavItem key={item.to} item={item} active={loc.pathname === item.to} />
+          <NavItem
+            key={item.to}
+            item={item}
+            active={loc.pathname === item.to}
+          />
         ))}
       </ul>
     </nav>

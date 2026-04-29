@@ -1,7 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Activity, Flame, Shield, Car, AlertTriangle, MapPin } from "lucide-react";
+import {
+  Activity,
+  Flame,
+  Shield,
+  Car,
+  AlertTriangle,
+  MapPin,
+} from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { useI18n } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth";
@@ -11,7 +18,10 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "ResQ Najda — SOS" },
-      { name: "description", content: "Tap the SOS button to send your location and call for help." },
+      {
+        name: "description",
+        content: "Tap the SOS button to send your location and call for help.",
+      },
     ],
   }),
   component: SosPage,
@@ -41,16 +51,24 @@ function SosContent() {
   const [type, setType] = useState<AlertType>("medical");
   const [description, setDescription] = useState("");
   const [busy, setBusy] = useState(false);
-  const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null);
+  const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(
+    null,
+  );
 
   const sendSOS = async () => {
     if (!user) return;
     setBusy(true);
     try {
-      const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-        if (!navigator.geolocation) return reject(new Error("Geolocation unavailable"));
-        navigator.geolocation.getCurrentPosition(resolve, reject, { enableHighAccuracy: true, timeout: 10000 });
-      });
+      const position = await new Promise<GeolocationPosition>(
+        (resolve, reject) => {
+          if (!navigator.geolocation)
+            return reject(new Error("Geolocation unavailable"));
+          navigator.geolocation.getCurrentPosition(resolve, reject, {
+            enableHighAccuracy: true,
+            timeout: 10000,
+          });
+        },
+      );
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
       setCoords({ lat, lng });
@@ -66,8 +84,8 @@ function SosContent() {
       if (error) throw error;
       toast.success(t("sos.sent"));
       setDescription("");
-    } catch (err: any) {
-      toast.error(err?.message ?? t("sos.error"));
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : t("sos.error"));
     } finally {
       setBusy(false);
     }
@@ -76,7 +94,9 @@ function SosContent() {
   return (
     <div className="space-y-6">
       <div className="rounded-3xl bg-hero p-6 text-navy-foreground shadow-[var(--shadow-card)]">
-        <h1 className="text-2xl font-extrabold leading-tight">{t("sos.title")}</h1>
+        <h1 className="text-2xl font-extrabold leading-tight">
+          {t("sos.title")}
+        </h1>
         <p className="mt-1 text-sm text-white/70">{t("sos.subtitle")}</p>
       </div>
 
@@ -87,10 +107,14 @@ function SosContent() {
             key={id}
             onClick={() => setType(id)}
             className={`flex flex-col items-center gap-1 rounded-2xl p-3 text-xs font-medium transition ${
-              type === id ? "ring-2 ring-emergency bg-card shadow-[var(--shadow-card)]" : "bg-card"
+              type === id
+                ? "ring-2 ring-emergency bg-card shadow-[var(--shadow-card)]"
+                : "bg-card"
             }`}
           >
-            <span className={`flex h-10 w-10 items-center justify-center rounded-xl ${tone}`}>
+            <span
+              className={`flex h-10 w-10 items-center justify-center rounded-xl ${tone}`}
+            >
               <Icon className="h-5 w-5" />
             </span>
             <span>{t(`sos.type.${id}`)}</span>

@@ -1,7 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Users, Siren, Clock, Video, Upload, Calendar, CalendarDays, ShieldAlert } from "lucide-react";
+import {
+  Users,
+  Siren,
+  Clock,
+  Video,
+  Upload,
+  Calendar,
+  CalendarDays,
+  ShieldAlert,
+} from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { useI18n } from "@/lib/i18n";
 import { useIsAdmin } from "@/lib/useIsAdmin";
@@ -65,7 +74,10 @@ function AdminPage() {
     setLoading(false);
   };
 
-  const updateStatus = async (id: string, status: "dispatched" | "resolved") => {
+  const updateStatus = async (
+    id: string,
+    status: "dispatched" | "resolved",
+  ) => {
     const { error } = await supabase
       .from("alerts")
       .update({ status })
@@ -96,19 +108,56 @@ function AdminPage() {
 
       {/* Stats grid */}
       <div className="grid grid-cols-2 gap-3">
-        <StatCard icon={Users} label={t("admin.stats.users")} value={stats?.total_users ?? 0} tone="text-info" />
-        <StatCard icon={Siren} label={t("admin.stats.alerts")} value={stats?.total_alerts ?? 0} tone="text-emergency" />
-        <StatCard icon={Clock} label={t("admin.stats.pending")} value={stats?.pending_alerts ?? 0} tone="text-warning" />
-        <StatCard icon={Video} label={t("admin.stats.complaints")} value={stats?.total_complaints ?? 0} tone="text-navy" />
-        <StatCard icon={Upload} label={t("admin.stats.uploaders")} value={stats?.total_uploaders ?? 0} tone="text-info" />
-        <StatCard icon={Calendar} label={t("admin.stats.today")} value={stats?.alerts_today ?? 0} tone="text-emergency" />
-        <StatCard icon={CalendarDays} label={t("admin.stats.week")} value={stats?.alerts_week ?? 0} tone="text-emergency" />
+        <StatCard
+          icon={Users}
+          label={t("admin.stats.users")}
+          value={stats?.total_users ?? 0}
+          tone="text-info"
+        />
+        <StatCard
+          icon={Siren}
+          label={t("admin.stats.alerts")}
+          value={stats?.total_alerts ?? 0}
+          tone="text-emergency"
+        />
+        <StatCard
+          icon={Clock}
+          label={t("admin.stats.pending")}
+          value={stats?.pending_alerts ?? 0}
+          tone="text-warning"
+        />
+        <StatCard
+          icon={Video}
+          label={t("admin.stats.complaints")}
+          value={stats?.total_complaints ?? 0}
+          tone="text-navy"
+        />
+        <StatCard
+          icon={Upload}
+          label={t("admin.stats.uploaders")}
+          value={stats?.total_uploaders ?? 0}
+          tone="text-info"
+        />
+        <StatCard
+          icon={Calendar}
+          label={t("admin.stats.today")}
+          value={stats?.alerts_today ?? 0}
+          tone="text-emergency"
+        />
+        <StatCard
+          icon={CalendarDays}
+          label={t("admin.stats.week")}
+          value={stats?.alerts_week ?? 0}
+          tone="text-emergency"
+        />
       </div>
 
       {/* Alerts list */}
       <section>
         <h2 className="mb-2 text-sm font-bold">{t("admin.alerts.title")}</h2>
-        {loading && <div className="text-center text-muted-foreground">...</div>}
+        {loading && (
+          <div className="text-center text-muted-foreground">...</div>
+        )}
         {!loading && alerts.length === 0 && (
           <div className="rounded-2xl bg-card p-6 text-center text-sm text-muted-foreground">
             {t("admin.alerts.empty")}

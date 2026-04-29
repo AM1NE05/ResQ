@@ -39,7 +39,12 @@ export function NotificationsBell() {
       .channel(`notif:${user.id}`)
       .on(
         "postgres_changes",
-        { event: "INSERT", schema: "public", table: "notifications", filter: `user_id=eq.${user.id}` },
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "notifications",
+          filter: `user_id=eq.${user.id}`,
+        },
         (payload) => {
           const n = payload.new as NotificationRow;
           setItems((prev) => [n, ...prev]);
@@ -99,11 +104,18 @@ export function NotificationsBell() {
                 </div>
               )}
               {items.map((n) => (
-                <div key={n.id} className={`flex gap-3 border-b border-border px-4 py-3 ${!n.read ? "bg-emergency/5" : ""}`}>
+                <div
+                  key={n.id}
+                  className={`flex gap-3 border-b border-border px-4 py-3 ${!n.read ? "bg-emergency/5" : ""}`}
+                >
                   <Siren className="mt-0.5 h-5 w-5 flex-shrink-0 text-emergency" />
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-semibold">{t(`notif.${n.title}.title`)}</p>
-                    <p className="mt-0.5 text-xs text-muted-foreground">{t(`notif.${n.title}.body`)}</p>
+                    <p className="text-sm font-semibold">
+                      {t(`notif.${n.title}.title`)}
+                    </p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">
+                      {t(`notif.${n.title}.body`)}
+                    </p>
                     <p className="mt-1 text-[10px] text-muted-foreground">
                       {new Date(n.created_at).toLocaleString()}
                     </p>

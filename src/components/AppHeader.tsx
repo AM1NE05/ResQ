@@ -1,6 +1,7 @@
 import { LogoLockup } from "./Logo";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { NotificationsBell } from "./NotificationsBell";
+import { ThemeToggle } from "./ThemeToggle";
 import { useAuth } from "@/lib/auth";
 
 export function AppHeader() {
@@ -10,6 +11,7 @@ export function AppHeader() {
       <div className="mx-auto flex max-w-md items-center justify-between px-4 py-3">
         <LogoLockup />
         <div className="flex items-center gap-1">
+          <ThemeToggle variant="dark" />
           <LanguageSwitcher variant="dark" />
           {user && <NotificationsBell />}
         </div>
