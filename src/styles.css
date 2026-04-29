@@ -1,4 +1,5 @@
 @import "tailwindcss" source(none);
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap') layer(base);
 @source "../src";
 @import "tw-animate-css";
 
@@ -158,7 +159,7 @@
 .animate-sos { animation: sos-pulse 1.8s ease-out infinite; }
 
 /* Cairo Arabic font from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap') layer(base);
+
 
 /* Leaflet quick fix for height */
 .leaflet-container { height: 100%; width: 100%; z-index: 0; }
