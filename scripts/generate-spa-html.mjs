@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distClientDir = path.join(__dirname, "../dist/client");
 
-// Find the main entry JS file
+// Find the main entry JS and CSS files
 const assetsDir = path.join(distClientDir, "assets");
 let mainJs = "index.js";
 let mainCss = "";
@@ -26,7 +26,7 @@ if (fs.existsSync(assetsDir)) {
   }
 }
 
-// Generate index.html
+// Generate index.html in dist/client/
 const htmlContent = `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -52,5 +52,6 @@ const indexPath = path.join(distClientDir, "index.html");
 fs.writeFileSync(indexPath, htmlContent);
 
 console.log(`✓ Generated ${indexPath}`);
-console.log(`  Entry: assets/${mainJs}`);
-if (mainCss) console.log(`  Styles: assets/${mainCss}`);
+console.log(`  Entry: ./assets/${mainJs}`);
+if (mainCss) console.log(`  Styles: ./assets/${mainCss}`);
+
