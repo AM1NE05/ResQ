@@ -40,11 +40,11 @@ const htmlContent = `<!DOCTYPE html>
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    ${mainCss ? `<link rel="stylesheet" href="./assets/${mainCss}" />` : ""}
+    ${mainCss ? `<link rel="stylesheet" href="/assets/${mainCss}" />` : ""}
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="./assets/${mainJs}"><\/script>
+    <script type="module" src="/assets/${mainJs}"><\/script>
   </body>
 </html>`;
 
