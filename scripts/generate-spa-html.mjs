@@ -28,7 +28,7 @@ if (fs.existsSync(assetsDir)) {
 
 // Generate index.html in dist/client/
 const htmlContent = `<!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -43,8 +43,7 @@ const htmlContent = `<!DOCTYPE html>
     ${mainCss ? `<link rel="stylesheet" href="/assets/${mainCss}" />` : ""}
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/assets/${mainJs}"><\/script>
+    <script type="module" src="/assets/${mainJs}"></script>
   </body>
 </html>`;
 
