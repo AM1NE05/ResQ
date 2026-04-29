@@ -2,8 +2,6 @@
 
 > **Emergency response platform** — SOS trigger, live incident map & citizen video reports for Tunisia.
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=flat-square)](https://resq.lovable.app)
-
 ---
 
 ## ✨ Features
