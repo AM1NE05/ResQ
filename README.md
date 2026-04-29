@@ -28,30 +28,22 @@ Ensure you have the following installed:
 
 ### Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/AM1NE05/ResQ.git
-   ```
+```bash
+# Clone and enter the project
+git clone https://github.com/AM1NE05/ResQ.git
+cd ResQ
 
-2. Navigate into the project directory:
-   ```bash
-   cd ResQ
-   ```
+# Install dependencies
+npm install
 
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-4. Copy the environment file and fill in your Supabase credentials:
-   ```bash
-   cp env .env
-   ```
-   Open `.env` and set your Supabase project values:
-   ```env
-   VITE_SUPABASE_URL=https://your-project.supabase.co
-   VITE_SUPABASE_ANON_KEY=your-anon-key
-   ```
+# Setup environment variables
+cp env .env
+```
+Open `.env` and set your Supabase project values:
+```env
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+```
 
 ### Running the Application Locally
 
