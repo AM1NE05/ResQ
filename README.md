@@ -26,6 +26,36 @@ Ensure you have the following installed:
 - Node.js (v18 or higher recommended)
 - npm or yarn (or bun)
 
+#### Installing Node.js
+
+**Windows:**
+1. Download Node.js from [https://nodejs.org](https://nodejs.org) (LTS version recommended)
+2. Run the installer and follow the setup wizard
+3. Restart your terminal or VS Code
+4. Verify installation:
+   ```bash
+   node --version
+   npm --version
+   ```
+
+**macOS:**
+```bash
+# Using Homebrew
+brew install node
+```
+
+**Linux (Ubuntu/Debian):**
+```bash
+sudo apt update
+sudo apt install nodejs npm
+```
+
+**PowerShell Execution Policy (Windows only):**
+If you encounter "running scripts is disabled" error, run:
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+```
+
 ### Installation
 
 ```bash
